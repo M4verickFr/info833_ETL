@@ -50,6 +50,7 @@ def reduce(hash1, hash2):
 def finish(hash):
     counts = r.hgetall(hash)
     counts = {k: int(v) for k, v in counts.items()}
+    counts = dict(sorted(counts.items(), key=lambda item: item[1], reverse=True))
 
     with open(os.path.join(sys.path[0], "result.json"), "w") as outfile:
         json.dump(counts, outfile, indent = 4)
