@@ -1,10 +1,10 @@
-from multiprocessing import Process
+from multiprocessing import Process;
 import taches, redis, string, random, time;
 
-r = redis.Redis(host='localhost', port=6379, db=0);
+r = redis.Redis(host='localhost', port=6379, db=0)
 
 def generate_random_hash():
-    return "".join(random.choice(string.ascii_uppercase + string.digits) for _ in range(16));
+    return "".join(random.choice(string.ascii_uppercase + string.digits) for _ in range(16))
 
 def make_task(task):
     taskName = task.split(":")[0]
@@ -14,8 +14,8 @@ def make_task(task):
     params = {k.decode("utf-8"): v.decode("utf-8") for k, v in params.items()}
     
     taskObject = getattr(taches, taskName)(params)
-    taskObject.extract();
-    data = taskObject.load();
+    taskObject.extract()
+    data = taskObject.load()
     
     if ("task" in data):
         hash = generate_random_hash()
@@ -26,7 +26,7 @@ def make_task(task):
         print(data)
     
 def init():
-    r.delete("task_queue");
+    r.delete("task_queue")
 
     params = {"path": "data-T1.json"}
     # Generate random hash
@@ -43,10 +43,10 @@ def main():
             for i in range(0, 10): # wait 10s, test each 1s
                 time.sleep(1) 
                 if (r.llen("task_queue") > 0):
-                    break;
+                    break
             if (r.llen("task_queue") == 0):
                 print("No tasks during 10s, exiting...")
-                break;
+                break
     
         print("Tasks found, starting...")
         task = (r.lpop("task_queue")).decode("utf-8")

@@ -1,7 +1,7 @@
 import taches, redis, string, random;
 
 def generate_random_hash():
-    return "".join(random.choice(string.ascii_uppercase + string.digits) for _ in range(16));
+    return "".join(random.choice(string.ascii_uppercase + string.digits) for _ in range(16))
 
 r = redis.Redis(host='localhost', port=6379, db=0, charset="utf-8")
 r.delete("task_queue")
@@ -21,8 +21,8 @@ while (r.llen("task_queue") > 0):
     params = {k.decode("utf-8"): v.decode("utf-8") for k, v in params.items()}
     
     taskObject = getattr(taches, taskName)(params)
-    taskObject.extract();
-    data = taskObject.load();
+    taskObject.extract()
+    data = taskObject.load()
     
     if ("task" in data):
         hash = generate_random_hash()
