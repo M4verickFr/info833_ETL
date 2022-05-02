@@ -1,0 +1,6 @@
+{
+    "ip": "https://api64.ipify.org/?format=json",
+    "github": "https://api.github.com/users/{}",
+    "twitter": "https://api.twitter.com/1.1/users/show.json?screen_name={}",
+    "facebook": "https://graph.facebook.com/{}"
+}
