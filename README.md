@@ -33,7 +33,7 @@ La donnée est stockées sous la forme *task_name:hash_name* où la première pa
 ### ETL parallélisme - Implémentation du parallélisme
 
 **👀 Pourquoi Python ne permet pas de faire du parallélisme au niveau thread ?**
->>> D’après ce que nous avons compris, le parallélisme au niveau thread est bloqué par le verrou d'interpréteur global (GIL).
+> D’après ce que nous avons compris, le parallélisme au niveau thread est bloqué par le verrou d'interpréteur global (GIL).
 Il s'agit d'un mutex qui  protège l'accès aux objets. Cela empêche de faire du parallélisme au niveau thread pour assurer la sécurité des threads. Car en python, les threads partagent la même mémoire. Avec plusieurs threads exécutés simultanément, nous ne connaissons pas l'ordre dans lequel les threads accèdent aux données partagées. 
 Le GIL a été inventé parce que la gestion de la mémoire en Python n'est pas thread-safe. Avec un seul thread en cours d'exécution à la fois, Python s’assure qu'il n'y aura jamais de conditions de concurrence.
 
